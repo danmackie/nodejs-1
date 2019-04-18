@@ -5,7 +5,7 @@ const requestHandler = (req, res) => {
   const method = req.method;
   if (url === '/') {
     res.write('<html>');
-    res.write('<head><title>Yo, hello.</title></head>');
+    res.write('<head><title>Yo, hello!</title></head>');
     res.write(
       '<body><h1>Yo, hello.</h1><br /><h3>Add a user</h3><form action="/create-user" method="POST"><input type="text" name="username"><button type="submit">Add user</button></form></body>'
     );
