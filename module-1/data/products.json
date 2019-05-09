@@ -1,1 +1,16 @@
-[{"title":"A Book","imageUrl":"https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg","id":"345364","description":"This is an awesome book!","price":"19"},{"title":"gfdsgfds","imageUrl":"https://www.publicdomainpictures.net/pictures/10000/velka/flower-331279658404MK8K.jpg","description":"Aceness","price":"700.99","id":"0.7248566092067472"}]
+[
+    {
+        "title": "A Book",
+        "imageUrl": "https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg",
+        "id": "345364",
+        "description": "This is an awesome book!",
+        "price": "19"
+    },
+    {
+        "title": "gfdsgfds",
+        "imageUrl": "https://www.publicdomainpictures.net/pictures/10000/velka/flower-331279658404MK8K.jpg",
+        "description": "Aceness",
+        "price": "700.99",
+        "id": "0.7248566092067472"
+    }
+]
