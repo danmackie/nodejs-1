@@ -10,8 +10,9 @@ const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+const Keys = require('./util/keys');
 
-const MONGODB_URI = 'mongodb+srv://dan:d4nm4ck1320131972@cluster0-zabwv.gcp.mongodb.net/shop';
+const MONGODB_URI = Keys.MONGODB_URI;
 
 const app = express();
 const store = new MongoDBStore({

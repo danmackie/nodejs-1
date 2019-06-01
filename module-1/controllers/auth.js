@@ -5,10 +5,11 @@ const { validationResult } = require('express-validator/check');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const User = require('../models/user');
+const Keys = require('../util/keys');
 
 const transporter = nodemailer.createTransport(sendgridTransport({
   auth: {
-    api_key: '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'
+    api_key: Keys.SENDGRID_API
   }
 }))
 
