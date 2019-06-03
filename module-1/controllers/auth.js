@@ -17,12 +17,7 @@ const transporter = nodemailer.createTransport(
 );
 
 exports.getLogin = (req, res, next) => {
-  let message = req.flash('error');
-  if (message.length > 0) {
-    message = message[0];
-  } else {
-    message = null;
-  }
+  let message = (req.flash('error').length > 0) ? req.flash('error')[0] : null;
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
@@ -30,26 +25,6 @@ exports.getLogin = (req, res, next) => {
     oldInput: {
       email: '',
       password: ''
-    },
-    validationErrors: []
-  });
-};
-
-exports.getSignup = (req, res, next) => {
-  let message = req.flash('error');
-  if (message.length > 0) {
-    message = message[0];
-  } else {
-    message = null;
-  }
-  res.render('auth/signup', {
-    path: '/signup',
-    pageTitle: 'Signup',
-    errorMessage: message,
-    oldInput: {
-      email: '',
-      password: '',
-      confirmPassword: ''
     },
     validationErrors: []
   });
@@ -117,6 +92,21 @@ exports.postLogin = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
+exports.getSignup = (req, res, next) => {
+  let message = (req.flash('error').length > 0) ? req.flash('error')[0] : null;
+  res.render('auth/signup', {
+    path: '/signup',
+    pageTitle: 'Signup',
+    errorMessage: message,
+    oldInput: {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    },
+    validationErrors: []
+  });
+};
+
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -149,12 +139,6 @@ exports.postSignup = (req, res, next) => {
     })
     .then(result => {
       res.redirect('/login');
-      // return transporter.sendMail({
-      //   to: email,
-      //   from: 'shop@node-complete.com',
-      //   subject: 'Signup succeeded!',
-      //   html: '<h1>You successfully signed up!</h1>'
-      // });
     })
     .catch(err => {
       console.log(err);
@@ -169,12 +153,7 @@ exports.postLogout = (req, res, next) => {
 };
 
 exports.getReset = (req, res, next) => {
-  let message = req.flash('error');
-  if (message.length > 0) {
-    message = message[0];
-  } else {
-    message = null;
-  }
+  let message = (req.flash('error').length > 0) ? req.flash('error')[0] : null;
   res.render('auth/reset', {
     path: '/reset',
     pageTitle: 'Reset Password',
@@ -221,12 +200,7 @@ exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
   User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
     .then(user => {
-      let message = req.flash('error');
-      if (message.length > 0) {
-        message = message[0];
-      } else {
-        message = null;
-      }
+      let message = (req.flash('error').length > 0) ? req.flash('error')[0] : null;
       res.render('auth/new-password', {
         path: '/new-password',
         pageTitle: 'New Password',
