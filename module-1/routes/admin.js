@@ -1,7 +1,7 @@
-// const path = require('path');
-const { body } = require('express-validator/check');
+const path = require('path');
 
 const express = require('express');
+const { body } = require('express-validator/check');
 
 const adminController = require('../controllers/admin');
 const isAuth = require('../middleware/is-auth');
@@ -14,55 +14,43 @@ router.get('/add-product', isAuth, adminController.getAddProduct);
 // /admin/products => GET
 router.get('/products', isAuth, adminController.getProducts);
 
-//POST ADD PRODUCT WITH VALIDATORS
+// /admin/add-product => POST
 router.post(
   '/add-product',
-  isAuth,
   [
     body('title')
       .isString()
       .isLength({ min: 3 })
-      .trim()
-      .withMessage('An alphanumeric title of 3 or more characters is required'),
-    body('imageUrl')
-      .isURL()
-      .withMessage('A valid URL is required'),
-    body('price')
-      .isFloat()
-      .withMessage('An number with two decimal places is required for price.'),
+      .trim(),
+    body('price').isFloat(),
     body('description')
-      .isLength({ min: 3, max: 400 })
+      .isLength({ min: 5, max: 400 })
       .trim()
-      .withMessage('An description of 3 to 400 characters is required')
   ],
+  isAuth,
   adminController.postAddProduct
 );
-// router.post('/add-product', isAuth, adminController.postAddProduct);
 
 router.get('/edit-product/:productId', isAuth, adminController.getEditProduct);
 
 router.post(
   '/edit-product',
-  isAuth,
   [
     body('title')
       .isString()
       .isLength({ min: 3 })
-      .trim()
-      .withMessage('An alphanumeric title of 3 or more characters is required'),
-    body('imageUrl')
-      .isURL()
-      .withMessage('A valid URL is required'),
-    body('price')
-      .isFloat()
-      .withMessage('An number with two decimal places is required for price.'),
+      .trim(),
+    body('price').isFloat(),
     body('description')
-      .isLength({ min: 3, max: 400 })
+      .isLength({ min: 5, max: 400 })
       .trim()
-      .withMessage('An description of 3 to 400 characters is required')
   ],
-  adminController.postEditProduct);
+  isAuth,
+  adminController.postEditProduct
+);
 
-router.post('/delete-product', isAuth, adminController.postDeleteProduct);
+router.delete('/product/:productId', isAuth, adminController.deleteProduct);
 
 module.exports = router;
+
+
